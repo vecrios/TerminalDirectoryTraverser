@@ -1,0 +1,56 @@
+# Author: Torky Almohaisen
+# A simple script to easily traverse folders. 
+
+#!/bin/bash
+
+# Exit if  not sourced. 
+if [ "$_" != "$0" ]; then
+    echo "----------------------------"
+else 
+    echo "Script is a subshell, it's not sourced!"
+    echo "Type '.' before command to source it"
+    exit
+fi
+
+# Add paths to folder in the format of 
+#   key:value where key is the shortcut and value 
+#       is the path to that said folder
+ARRAY=( "coding:~/desktop/coding"
+        "python:~/desktop/coding/python"
+        "scripts:~/scripts"
+        "home:~"
+        "app:/applications"
+        "downloads:~/downloads")
+
+# print the saved directories
+for array_path in "${ARRAY[@]}" ; do
+    KEY=${array_path%%:*}
+    VALUE=${array_path#*:}
+    printf "%15s : %s\n" "$KEY" "$VALUE"
+done
+echo "----------------------------"
+
+# Takes user input and checks if valid or not. If valid 'cd' to 
+# that folder; else ask for new input
+# if input is 'exit' quit
+while [[ true ]]; do
+    # get input from user
+    read -p "cd " path_to
+
+    # exits on command
+    if [[ $path_to == "exit" ]]; then
+        echo "exiting..."
+        return
+    fi
+
+    for array_path in "${ARRAY[@]}" ; do
+        KEY=${array_path%%:*}
+        VALUE=${array_path#*:}
+        if [[ $KEY == $path_to ]]; 
+    	then
+        	eval "cd " $VALUE
+            return
+        fi
+    done
+    echo "Invalid input. (type 'exit' to end)"
+done
