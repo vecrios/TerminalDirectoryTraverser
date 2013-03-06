@@ -20,7 +20,10 @@ ARRAY=( "coding:~/desktop/coding"
         "scripts:~/scripts"
         "home:~"
         "app:/applications"
-        "downloads:~/downloads")
+        "downloads:~/downloads"
+        "SublPack:~/Library/Application\ Support/Sublime\ Text\ 2/Packages/"
+        "repos:~/desktop/coding/GitHubRepos"
+        "eclipse:~/documents/eclipse/workspace")
 
 # print the saved directories
 for array_path in "${ARRAY[@]}" ; do
